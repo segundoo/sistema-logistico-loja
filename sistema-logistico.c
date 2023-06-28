@@ -18,7 +18,47 @@ struct produto
         float valorTotalPorProduto;
     };
 
+void cadastroProduto()
+{
+    setlocale(LC_ALL, "");
+
+    struct produto pCadastro[99];
+    int i = 0, opcao;
+    /*do
+    { */  //levantamento de dados do produto para cadastramento
+        printf("Codigo do produto: ");
+        fflush(stdin);
+        scanf("%d", &pCadastro[0].idProduto);
+        printf("");
+        printf("Descrição do produto: ");
+        fflush(stdin);
+        scanf("%s", &pCadastro[1].descricao);
+        printf("");
+        printf("Valor unitário: R$");
+        fflush(stdin);
+        scanf("%2f", &pCadastro[1].valorUnitario);
+        printf("");
+        printf("Saldo em estoque: ");
+        fflush(stdin);
+        scanf("%d", &pCadastro[1].qtdEstoque);
+        printf("");
+        printf("");
+
+        printf("Deseja continuar cadastrando?\n");
+        printf("[1]SIM [2] Voltar ao menu principal\n");
+        scanf("%d", &opcao);
+
+        i++;
+        if (opcao == 1)
+        {
+            cadastroProduto();
+        } else {
+            main();
+        }
+
+    /*} while (opcao == 2);*/
     
+}    
     
 
 int main()
@@ -38,20 +78,23 @@ int main()
         printf("2 - entrada no estoque por produto\n");
         printf("3 - Venda de produto\n");
         printf("0 - sair\n");
+        fflush(stdin);
         scanf("%d", &opcao);
 
         switch (opcao)
         {
         case 1:
             cadastroProduto();
-            break;        
+            break;    
+        case 0:
+            exit(0);
+            break;
         default:
             printf("[ERRO] Opção invalida!");
             break;
         }
 
-    } while (opcao == 0);
+    } while (opcao != 0);
     
-
     return 0;
 }
