@@ -18,14 +18,13 @@ struct produto
         float valorTotalPorProduto;
     };
 
-void cadastroProduto()
-{
+struct produto pCadastro[99];
+
+void cadastroProduto() {
     setlocale(LC_ALL, "");
 
-    struct produto pCadastro[99];
     int i = 0, opcao;
-    /*do
-    { */  //levantamento de dados do produto para cadastramento
+    //levantamento de dados do produto para cadastramento
         printf("Codigo do produto: ");
         fflush(stdin);
         scanf("%d", &pCadastro[0].idProduto);
@@ -45,7 +44,7 @@ void cadastroProduto()
         printf("");
 
         printf("Deseja continuar cadastrando?\n");
-        printf("[1]SIM [2] Voltar ao menu principal\n");
+        printf("[1] SIM [2] Voltar ao menu principal\n");
         scanf("%d", &opcao);
 
         i++;
@@ -55,17 +54,29 @@ void cadastroProduto()
         } else {
             main();
         }
-
-    /*} while (opcao == 2);*/
     
 }    
+
+void listarProdutosCadastrados() {
+    int i;
+
+    do
+    {
+        printf("%d ", pCadastro[i].idProduto);
+        printf("%d ", pCadastro[i].descricao);
+        printf("%2f ", pCadastro[i].valorUnitario);
+        printf("%d \n", pCadastro[i].qtdEstoque);
+    } while (i < 99);
     
+}
+/*void entradaProdutos() {
 
-int main()
-{
-    setlocale(LC_ALL, "portuguese");
+}*/
 
-    int i, opcao;
+int main() {
+    setlocale(LC_ALL, "");
+
+    int i, opcao, inEstoque;
 
     do
     {
@@ -75,7 +86,7 @@ int main()
 
         printf("Menu: \n"); //menu de opções
         printf("1 - Cadastrar produto\n"); //leva a função cadastroProduto()
-        printf("2 - entrada no estoque por produto\n");
+        printf("2 - entrada no estoque por produto\n"); //leva ao menu de "Entrada no estoque por produto"
         printf("3 - Venda de produto\n");
         printf("0 - sair\n");
         fflush(stdin);
@@ -84,8 +95,25 @@ int main()
         switch (opcao)
         {
         case 1:
+            system("cls");
             cadastroProduto();
-            break;    
+            break;
+
+        case 2:
+            system("cls");
+            printf("---------------------------------------\n");
+            printf("     Entrada no estoque por produto    \n");
+            printf("---------------------------------------\n");
+            printf("1 - listar produtos cadastrados\n"); //leva a função listarProdutosCadastados
+            printf("2 - entrada de produtos\n"); //leva a função entradasProdutos
+            printf("0 - Voltar ao menu principal\n"); //volta ao menu inicial
+            scanf("%d", &inEstoque);
+            if (inEstoque == 1)
+            {
+                listarProdutosCadastrados();
+            }
+            
+            break;
         case 0:
             exit(0);
             break;
